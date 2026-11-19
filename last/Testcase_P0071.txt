@@ -1,0 +1,203 @@
+TEST CASE BÀI J1.S.P0071 - TASK MANAGEMENT
+==========================================================================
+
+Cách dùng:
+- Mở file này song song với NetBeans, chạy lần lượt từng nhóm.
+- Đánh dấu [x] khi kết quả giống cột "Mong đợi".
+- Sai chỗ nào thì sửa code rồi chạy lại TOÀN BỘ các nhóm, không chỉ case vừa sửa.
+
+Quy ước:
+- (Enter)  = để trống, nhấn Enter luôn.
+- "Báo lỗi" = in thông báo lỗi rồi HỎI LẠI đúng câu đó, chương trình không crash.
+- Nội dung thông báo lỗi do bạn tự đặt (đề không quy định), miễn rõ nghĩa.
+
+CÁC CASE TỪNG BỊ LỖI Ở BẢN TRƯỚC (test kỹ nhất):
+  B10 (chọn 4 không thoát được)        D7 (xóa xong tự in bảng)
+  D9  (xóa bị crash)                   E2 (ID bị trùng)
+  C16-C21 (ngày không tồn tại vẫn nhận) C30-C32 (giờ 9.3, From = To vẫn nhận)
+  A7  (Time in ra 8,0)
+
+==========================================================================
+NHÓM A: GIAO DIỆN - SO TỪNG CHỮ VỚI ẢNH MẪU CỦA ĐỀ
+==========================================================================
+
+[ ] A1  Menu (ô 1):
+            ========= Task program =========
+                1. Add Task
+                2. Delete task
+                3. Display Task
+                4. exit
+        - Tiêu đề: 9 dấu "=" + cách + "Task program" + cách + 9 dấu "="
+        - Chú ý chữ thường: "Delete task", "exit"
+
+[ ] A2  Tiêu đề Add Task (ô 2): 12 dấu "-" + "Add Task" + 15 dấu "-", không có dấu cách
+            ------------Add Task---------------
+
+[ ] A3  Thứ tự câu hỏi khi Add Task (có dấu cách sau dấu ":"):
+            Requirement Name: -> Task Type: -> Date: -> From: -> To: -> Assignee: -> Reviewer:
+
+[ ] A4  Tiêu đề Delete (ô 3): 9 dấu "-" + "Del Task" + 6 dấu "-", không có dấu cách
+            ---------Del Task------
+            ID:
+
+[ ] A5  Tiêu đề bảng (ô 4): 41 dấu "-" + " Task " + 39 dấu "-"
+            ----------------------------------------- Task ---------------------------------------
+
+[ ] A6  Tên cột đúng thứ tự: ID | Name | Task Type | Date | Time | Assignee | Reviewer
+
+[ ] A7  Cột Time in "8.0": dấu CHẤM, 1 chữ số sau dấu chấm. Không được "8,0" hay "8.00"
+
+[ ] A8  Cột Task Type in TÊN loại (Code / Test / Design / Review), không in số 1-4
+
+[ ] A9  Sau chức năng 1, 2, 3 đều quay lại menu
+
+==========================================================================
+NHÓM B: MENU (Function 1)
+==========================================================================
+
+| Mã  | Nhập          | Mong đợi                                           | Đạt |
+|-----|---------------|----------------------------------------------------|-----|
+| B1  | (Enter)       | Báo lỗi: để trống                                  | [ ] |
+| B2  | abc           | Báo lỗi: phải là số nguyên                         | [ ] |
+| B3  | @#$           | Báo lỗi: phải là số nguyên                         | [ ] |
+| B4  | 1.5           | Báo lỗi: phải là số nguyên                         | [ ] |
+| B5  | 0             | Báo lỗi: phải trong khoảng 1-4                     | [ ] |
+| B6  | 5             | Báo lỗi: phải trong khoảng 1-4                     | [ ] |
+| B7  | -1            | Báo lỗi: phải trong khoảng 1-4                     | [ ] |
+| B8  | 99999999999   | Báo lỗi, KHÔNG crash (số vượt giới hạn kiểu int)   | [ ] |
+| B9  | 1 / 2 / 3     | Vào đúng chức năng tương ứng                       | [ ] |
+| B10 | 4             | Thoát chương trình (NetBeans hiện BUILD SUCCESSFUL)| [ ] |
+
+==========================================================================
+NHÓM C: ADD TASK (Option 1)
+==========================================================================
+
+--- Requirement Name ---
+| Mã  | Nhập                 | Mong đợi                                         | Đạt |
+|-----|----------------------|--------------------------------------------------|-----|
+| C1  | (Enter)              | Báo lỗi: để trống                                | [ ] |
+| C2  | "   " (chỉ dấu cách) | Nên báo lỗi (dùng trim()). Đề không bắt buộc     | [ ] |
+| C3  | Dev Program          | Nhận (tên có dấu cách vẫn hợp lệ)                | [ ] |
+
+--- Task Type (chỉ có 1 Code, 2 Test, 3 Design, 4 Review) ---
+| Mã  | Nhập                 | Mong đợi                                         | Đạt |
+|-----|----------------------|--------------------------------------------------|-----|
+| C4  | (Enter)              | Báo lỗi: để trống                                | [ ] |
+| C5  | abc                  | Báo lỗi: phải là số                              | [ ] |
+| C6  | 1.5                  | Báo lỗi: phải là số nguyên                       | [ ] |
+| C7  | 0                    | Báo lỗi: chỉ có 1-4                              | [ ] |
+| C8  | 5                    | Báo lỗi: chỉ có 1-4                              | [ ] |
+| C9  | 1 / 2 / 3 / 4        | Nhận. Bảng hiện Code / Test / Design / Review    | [ ] |
+
+--- Date (dd-MM-yyyy, ngày phải tồn tại) ---
+| Mã  | Nhập                 | Mong đợi                                         | Đạt |
+|-----|----------------------|--------------------------------------------------|-----|
+| C10 | (Enter)              | Báo lỗi: để trống                                | [ ] |
+| C11 | abc                  | Báo lỗi: sai định dạng                           | [ ] |
+| C12 | 26/06/2015           | Báo lỗi: sai định dạng (dùng "/" thay vì "-")    | [ ] |
+| C13 | 26-6-2015            | Báo lỗi: sai định dạng (tháng chỉ 1 chữ số)      | [ ] |
+| C14 | 26-06-15             | Báo lỗi: sai định dạng (năm chỉ 2 chữ số)        | [ ] |
+| C15 | 26-06-2015abc        | Báo lỗi: sai định dạng (thừa chữ phía sau)       | [ ] |
+| C16 | 32-01-2015           | Báo lỗi: ngày không tồn tại                      | [ ] |
+| C17 | 00-01-2015           | Báo lỗi: ngày không tồn tại                      | [ ] |
+| C18 | 15-13-2015           | Báo lỗi: không có tháng 13                       | [ ] |
+| C19 | 31-04-2015           | Báo lỗi: tháng 4 chỉ có 30 ngày                  | [ ] |
+| C20 | 29-02-2015           | Báo lỗi: 2015 không phải năm nhuận               | [ ] |
+| C21 | 29-02-1900           | Báo lỗi: 1900 chia hết 100 nhưng không chia hết  | [ ] |
+|     |                      | 400 nên không nhuận                              |     |
+| C22 | 29-02-2016           | Nhận (năm nhuận)                                 | [ ] |
+| C23 | 29-02-2000           | Nhận (chia hết 400 nên nhuận)                    | [ ] |
+| C24 | 26-06-2015           | Nhận. Bảng hiện đúng 26-06-2015                  | [ ] |
+
+--- From / To (từ 8.0 đến 17.5, bước 0.5, From phải nhỏ hơn To) ---
+Nếu chương trình hỏi xong cả From và To rồi mới kiểm tra, thì nhập đủ cặp như cột "Nhập".
+| Mã  | Nhập                 | Mong đợi                                         | Đạt |
+|-----|----------------------|--------------------------------------------------|-----|
+| C25 | From (Enter)         | Báo lỗi: để trống                                | [ ] |
+| C26 | From abc, To 9       | Báo lỗi: phải là số                              | [ ] |
+| C27 | From 8,5, To 9       | Báo lỗi: phải là số (Java chỉ hiểu dấu chấm)     | [ ] |
+| C28 | From 7.5, To 9       | Báo lỗi: ngoài khoảng 8.0 - 17.5                 | [ ] |
+| C29 | From 9, To 18        | Báo lỗi: ngoài khoảng 8.0 - 17.5                 | [ ] |
+| C30 | From 9.3, To 10      | Báo lỗi: phải là bội của 0.5                     | [ ] |
+| C31 | From 9, To 9.25      | Báo lỗi: phải là bội của 0.5                     | [ ] |
+| C32 | From 9, To 9         | Báo lỗi: From phải NHỎ HƠN To                    | [ ] |
+| C33 | From 10, To 9        | Báo lỗi: From phải nhỏ hơn To                    | [ ] |
+| C34 | From 8, To 17.5      | Nhận (đúng 2 biên). Time = 9.5                   | [ ] |
+| C35 | From 17, To 17.5     | Nhận. Time = 0.5                                 | [ ] |
+| C36 | From 9.5, To 17.5    | Nhận. Time = 8.0 (giống ảnh mẫu)                 | [ ] |
+
+--- Assignee / Reviewer ---
+| Mã  | Nhập                 | Mong đợi                                         | Đạt |
+|-----|----------------------|--------------------------------------------------|-----|
+| C37 | Assignee (Enter)     | Báo lỗi: để trống                                | [ ] |
+| C38 | Reviewer (Enter)     | Báo lỗi: để trống                                | [ ] |
+| C39 | Dev / Lead           | Nhận                                             | [ ] |
+
+==========================================================================
+NHÓM D: DELETE TASK (Option 2)
+==========================================================================
+
+Chuẩn bị: chạy lại chương trình từ đầu (danh sách rỗng).
+| Mã  | Nhập                 | Mong đợi                                         | Đạt |
+|-----|----------------------|--------------------------------------------------|-----|
+| D1  | Chọn 2 khi chưa có   | Báo danh sách rỗng, quay về menu, không crash    | [ ] |
+|     | task nào             |                                                  |     |
+
+Chuẩn bị tiếp: thêm 3 task A, B, C (để nhanh: Task Type 1, Date 01-01-2020,
+From 8, To 9, Assignee X, Reviewer Y). ID sẽ là A=1, B=2, C=3.
+Mỗi case, nếu chương trình đã về menu thì chọn lại 2.
+| Mã  | Nhập                 | Mong đợi                                         | Đạt |
+|-----|----------------------|--------------------------------------------------|-----|
+| D2  | ID: (Enter)          | Báo lỗi: để trống                                | [ ] |
+| D3  | ID: abc              | Báo lỗi: phải là số                              | [ ] |
+| D4  | ID: 1.5              | Báo lỗi: phải là số nguyên                       | [ ] |
+| D5  | ID: 99               | Báo ID không tồn tại, không xóa gì               | [ ] |
+| D6  | ID: 0  và  ID: -1    | Báo ID không tồn tại                             | [ ] |
+| D7  | ID: 2                | Xóa B rồi về menu (KHÔNG tự in bảng).            | [ ] |
+|     |                      | Chọn 3: còn ID 1 và 3                            |     |
+| D8  | ID: 2 (lần nữa)      | Báo ID không tồn tại                             | [ ] |
+| D9  | ID: 3                | Xóa C, KHÔNG crash. Chọn 3: còn ID 1             | [ ] |
+| D10 | ID: 1                | Xóa A. Chọn 3: bảng rỗng                         | [ ] |
+
+==========================================================================
+NHÓM E: ID TỰ TĂNG (đề: ID = ID của task cuối + 1)
+==========================================================================
+
+Chuẩn bị: chạy lại chương trình từ đầu.
+| Mã  | Thao tác                    | Mong đợi                                  | Đạt |
+|-----|-----------------------------|-------------------------------------------|-----|
+| E1  | Thêm 3 task                 | ID lần lượt 1, 2, 3                       | [ ] |
+| E2  | Xóa ID 1, thêm 1 task mới   | Task mới có ID 4 (task cuối là 3).        | [ ] |
+|     |                             | KHÔNG có 2 task trùng ID                  |     |
+| E3  | Xóa ID 4, thêm 1 task mới   | Task mới có ID 4 (task cuối lúc này là 3).| [ ] |
+|     |                             | Đúng công thức của đề                     |     |
+| E4  | Xóa hết, thêm 1 task mới    | Task mới có ID 1                          | [ ] |
+| E5  | Chọn 3 sau mỗi bước trên    | ID tăng dần, không có dòng trùng ID       | [ ] |
+
+==========================================================================
+NHÓM F: DISPLAY TASK (Option 3)
+==========================================================================
+
+| Mã  | Thao tác                         | Mong đợi                                | Đạt |
+|-----|----------------------------------|-----------------------------------------|-----|
+| F1  | Chọn 3 khi chưa có task          | Không crash. Nên in "List task is empty"| [ ] |
+| F2  | Thêm đúng ví dụ ảnh mẫu, chọn 3  | 1  Dev Program  Code  26-06-2015  8.0   | [ ] |
+|     |                                  |    Dev  Lead                            |     |
+| F3  | Thêm task Task Type 2, 3, 4      | Cột Task Type: Test, Design, Review     | [ ] |
+| F4  | Thêm và xóa xen kẽ rồi chọn 3    | Bảng xếp theo ID tăng dần               | [ ] |
+| F5  | Requirement Name dài, ví dụ      | Các cột vẫn thẳng hàng. Nếu lệch thì    | [ ] |
+|     | "Develop login function for bank"| tăng độ rộng cột trong printf (không    |     |
+|     |                                  | bắt buộc)                               |     |
+
+==========================================================================
+NHÓM G: KỊCH BẢN CHẠY LẠI ĐÚNG ẢNH MẪU (dùng khi demo cho thầy)
+==========================================================================
+
+[ ] G1  Chạy chương trình -> menu giống ô 1
+[ ] G2  Chọn 1 -> nhập: Dev Program / 1 / 26-06-2015 / 9.5 / 17.5 / Dev / Lead -> giống ô 2
+[ ] G3  Chọn 3 -> bảng giống ô 4:
+            1    Dev Program    Code    26-06-2015    8.0    Dev    Lead
+        (Ảnh mẫu ghi 28-08-2015 là do đề gõ lệch. Chương trình phải in đúng ngày đã nhập.)
+[ ] G4  Chọn 2 -> hiện "---------Del Task------", nhập ID: 1 -> giống ô 3
+[ ] G5  Chọn 3 -> bảng rỗng
+[ ] G6  Chọn 4 -> thoát chương trình
